@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'castar_sdk.dart';
 
 void main() {
   runApp(const MyTimeApp());
@@ -30,23 +31,115 @@ class WelcomeScreen extends StatefulWidget {
 class _WelcomeScreenState extends State<WelcomeScreen> {
   final TextEditingController _clientIdController = TextEditingController();
   String? _clientId;
+  bool _isInitialized = false;
+  bool _isStarted = false;
+  bool _isLoading = false;
 
-  void _submitClientId() {
+  void _submitClientId() async {
     setState(() {
       _clientId = _clientIdController.text.trim();
+      _isLoading = true;
     });
 
     if (_clientId != null && _clientId!.isNotEmpty) {
+      // Initialize CastarSDK
+      final bool success = await CastarSDK.initialize(_clientId!);
+
+      setState(() {
+        _isInitialized = success;
+        _isLoading = false;
+      });
+
+      if (success) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('CastarSDK initialized with Client ID: $_clientId'),
+            backgroundColor: Colors.green,
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Failed to initialize CastarSDK'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Client ID submitted: $_clientId'),
+        const SnackBar(
+          content: Text('Please enter a valid Client ID'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  void _startCastarSDK() async {
+    if (!_isInitialized) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Please initialize CastarSDK first'),
+          backgroundColor: Colors.orange,
+        ),
+      );
+      return;
+    }
+
+    setState(() {
+      _isLoading = true;
+    });
+
+    final bool success = await CastarSDK.start();
+
+    setState(() {
+      _isStarted = success;
+      _isLoading = false;
+    });
+
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('CastarSDK started successfully'),
           backgroundColor: Colors.green,
         ),
       );
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('Please enter a valid Client ID'),
+          content: Text('Failed to start CastarSDK'),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  void _stopCastarSDK() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    final bool success = await CastarSDK.stop();
+
+    setState(() {
+      _isStarted = !success;
+      _isLoading = false;
+    });
+
+    if (success) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('CastarSDK stopped successfully'),
+          backgroundColor: Colors.blue,
+        ),
+      );
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Failed to stop CastarSDK'),
           backgroundColor: Colors.red,
         ),
       );
@@ -93,14 +186,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 child: TextField(
                   controller: _clientIdController,
                   decoration: InputDecoration(
-                    labelText: 'Enter Client ID',
-                    hintText: 'Please enter your client ID',
+                    labelText: 'Enter CastarSDK Client ID',
+                    hintText: 'Please enter your CastarSDK client ID',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
                     filled: true,
                     fillColor: Colors.white,
-                    prefixIcon: const Icon(Icons.person),
+                    prefixIcon: const Icon(Icons.key),
                   ),
                   onSubmitted: (_) => _submitClientId(),
                 ),
@@ -109,7 +202,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: _submitClientId,
+                  onPressed: _isLoading ? null : _submitClientId,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.blue.shade600,
                     foregroundColor: Colors.white,
@@ -118,14 +211,20 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  child: const Text(
-                    'Submit',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                  ),
+                  child:
+                      _isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text(
+                            'Initialize CastarSDK',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
                 ),
               ),
-              if (_clientId != null && _clientId!.isNotEmpty) ...[
-                const SizedBox(height: 20),
+              if (_isInitialized) ...[
+                const SizedBox(height: 30),
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
@@ -134,12 +233,60 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     border: Border.all(color: Colors.green.shade200),
                   ),
                   child: Text(
-                    'Client ID: $_clientId',
+                    'CastarSDK Initialized: $_clientId',
                     style: TextStyle(
                       color: Colors.green.shade800,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: _isLoading ? null : _startCastarSDK,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              _isStarted ? Colors.grey : Colors.green.shade600,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: Text(
+                          _isStarted ? 'Started' : 'Start CastarSDK',
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed:
+                            _isLoading || !_isStarted ? null : _stopCastarSDK,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red.shade600,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 15),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                        child: const Text(
+                          'Stop CastarSDK',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
             ],
