@@ -14,9 +14,9 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		A782E6F4CDD44AA9870855AF856ABBD8 /* CastarSDKHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A782E6F4CDD44AA9870855AF856ABBD8 /* CastarSDKHandler.swift */; };
-		6D71B92B8FF54C829BF7DC76170328E1 /* CastarSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D71B92B8FF54C829BF7DC76170328E1 /* CastarSDK.framework */; };
-		9828050B00F34F74AE98082F0864CE5C /* CastarSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6D71B92B8FF54C829BF7DC76170328E1 /* CastarSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		831F5A54A6984900A6AC02BE6641DCBD /* CastarSDKHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 831F5A54A6984900A6AC02BE6641DCBD /* CastarSDKHandler.swift */; };
+		6D71B92B8FF54C829BF7DC76170328E1 /* CastarSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F26A08965A52402796ED1136A9EDEC2B /* CastarSDK.framework */; };
+		9828050B00F34F74AE98082F0864CE5C /* CastarSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 844EA967E20646DB8710A1E0004B5CD6 /* CastarSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,8 +59,8 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A782E6F4CDD44AA9870855AF856ABBD8 /* CastarSDKHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastarSDKHandler.swift; sourceTree = "<group>"; };
-		6D71B92B8FF54C829BF7DC76170328E1 /* CastarSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "CastarSDK.framework"; sourceTree = "<group>"; };
+		831F5A54A6984900A6AC02BE6641DCBD /* CastarSDKHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CastarSDKHandler.swift; sourceTree = "<group>"; };
+		F26A08965A52402796ED1136A9EDEC2B /* CastarSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = "CastarSDK.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +68,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D71B92B8FF54C829BF7DC76170328E1 /* CastarSDK.framework in Frameworks */,
+				F26A08965A52402796ED1136A9EDEC2B /* CastarSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -124,8 +124,8 @@
 				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
 				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
 				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
-				A782E6F4CDD44AA9870855AF856ABBD8 /* CastarSDKHandler.swift */,
-				6D71B92B8FF54C829BF7DC76170328E1 /* CastarSDK.framework */,
+				831F5A54A6984900A6AC02BE6641DCBD /* CastarSDKHandler.swift */,
+				F26A08965A52402796ED1136A9EDEC2B /* CastarSDK.framework */,
 			);
 			path = Runner;
 			sourceTree = "<group>";
@@ -279,7 +279,7 @@
 			files = (
 				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
 				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
-				A782E6F4CDD44AA9870855AF856ABBD8 /* CastarSDKHandler.swift in Sources */,
+				831F5A54A6984900A6AC02BE6641DCBD /* CastarSDKHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
