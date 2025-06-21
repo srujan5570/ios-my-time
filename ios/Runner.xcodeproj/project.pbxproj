@@ -324,6 +324,10 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Runner",
+				);
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -334,6 +338,8 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"CastarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.myTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -357,6 +363,10 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Runner",
+				);
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -367,6 +377,8 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"CastarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.myTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -452,6 +464,10 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Runner",
+				);
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -462,6 +478,8 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"CastarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.myTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -485,6 +503,10 @@
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/Runner",
+				);
 				INFOPLIST_FILE = Runner/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -495,6 +517,8 @@
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
+					"-framework",
+					"CastarSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.myTime;
 				PRODUCT_NAME = "$(TARGET_NAME)";
