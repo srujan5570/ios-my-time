@@ -22,23 +22,21 @@ jobs:
       - run: pod repo update
         working-directory: ios
 
-      - run: flutter build ios --debug --simulator
+      - run: flutter build ios --release --no-codesign
 
-      - run: mkdir Payload
-        working-directory: build/ios/iphonesimulator
-
-      - run: mv Runner.app/ Payload
-        working-directory: build/ios/iphonesimulator
-
-      - name: Zip output
-        run: zip -qq -r -9 FlutterIpaExport.ipa Payload
-        working-directory: build/ios/iphonesimulator
+      - name: Create IPA
+        run: |
+          cd build/ios/iphoneos
+          mkdir -p Payload
+          cp -r Runner.app Payload/
+          zip -r Runner.ipa Payload
+        shell: bash
 
       - name: Upload binaries to release
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: build/ios/iphonesimulator/FlutterIpaExport.ipa
+          file: build/ios/iphoneos/Runner.ipa
           tag: v1.0
           overwrite: true
           body: "This is first release" 
