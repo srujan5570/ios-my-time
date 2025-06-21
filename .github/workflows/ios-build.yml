@@ -22,7 +22,7 @@ jobs:
       - run: pod repo update
         working-directory: ios
 
-      - run: flutter build ios --release --simulator
+      - run: flutter build ios --debug --simulator
 
       - run: mkdir Payload
         working-directory: build/ios/iphonesimulator
