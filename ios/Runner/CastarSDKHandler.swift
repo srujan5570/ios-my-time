@@ -33,15 +33,14 @@ class CastarSDKHandler: NSObject {
             return
         }
         
-        // Create Castar instance
-        let castarResult = Castar.createInstance(devKey: clientId)
+        // Create Castar instance using the correct API
+        let castarInstance = Castar.createInstance(withDevKey: clientId)
         
-        switch castarResult {
-        case .success(let instance):
-            castarInstance = instance
+        if let instance = castarInstance {
+            self.castarInstance = instance
             result(true)
-        case .failure(let error):
-            print("Failed to initialize Castar: \(error.localizedDescription)")
+        } else {
+            print("Failed to initialize Castar: Invalid client ID or SDK error")
             result(false)
         }
     }
